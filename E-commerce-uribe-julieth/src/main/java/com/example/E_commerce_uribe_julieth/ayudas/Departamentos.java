@@ -1,0 +1,37 @@
+package com.example.E_commerce_uribe_julieth.ayudas;
+
+public enum Departamentos {
+    AMAZONAS,
+    ANTIOQUIA,
+    ARAUCA,
+    ATLANTICO,
+    BOLIVAR,
+    BOYACA,
+    CALDAS,
+    CAQUETA,
+    CASANARE,
+    CAUCA,
+    CESAR,
+    CHOCO,
+    CORDOBA,
+    CUNDINAMARCA,
+    GUAINIA,
+    GUAJIRA,
+    GUAVIARE,
+    HUILA,
+    MAGDALENA,
+    META,
+    NARINO,
+    NORTE_DE_SANTANDER,
+    PUTUMAYO,
+    QUINDIO,
+    RISARALDA,
+    SAN_ANDRES_Y_PROVIDENCIA,
+    SANTANDER,
+    SUCRE,
+    TOLIMA,
+    VALLE_DEL_CAUCA,
+    VAUPES,
+    VICHADA
+
+}
