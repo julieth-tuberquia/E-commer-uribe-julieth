@@ -1,6 +1,6 @@
 package com.example.E_commerce_uribe_julieth.modelos.DTOS;
 
-import com.example.E_commerce_uribe_julieth.ayudas.EstadosUsuario;
+import com.example.E_commerce_uribe_julieth.ayudas.EstadosUsuarios;
 
 import java.time.LocalDate;
 
@@ -8,7 +8,7 @@ public class UsuarioEspecialDTO {
 
     private String nombres;
     private String correo;
-    private EstadosUsuario estado;
+    private EstadosUsuarios estado;
     private LocalDate fechaNacimiento;
     private String documento;
     private String contraseña;
@@ -16,7 +16,7 @@ public class UsuarioEspecialDTO {
     public UsuarioEspecialDTO() {
     }
 
-    public UsuarioEspecialDTO(String nombres, String correo, EstadosUsuario estado,
+    public UsuarioEspecialDTO(String nombres, String correo, EstadosUsuarios estado,
                               LocalDate fechaNacimiento, String documento, String contraseña) {
         this.nombres = nombres;
         this.correo = correo;
@@ -42,11 +42,11 @@ public class UsuarioEspecialDTO {
         this.correo = correo;
     }
 
-    public EstadosUsuario getEstado() {
+    public EstadosUsuarios getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadosUsuario estado) {
+    public void setEstado(EstadosUsuarios estado) {
         this.estado = estado;
     }
 

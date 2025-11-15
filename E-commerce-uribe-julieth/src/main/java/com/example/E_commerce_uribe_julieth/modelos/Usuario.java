@@ -1,6 +1,6 @@
 package com.example.E_commerce_uribe_julieth.modelos;
 
-import com.example.E_commerce_uribe_julieth.ayudas.EstadosUsuario;
+import com.example.E_commerce_uribe_julieth.ayudas.EstadosUsuarios;
 import com.example.E_commerce_uribe_julieth.ayudas.TipoDocumento;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -24,7 +24,7 @@ public class Usuario {
     private String contraseña;
     @Enumerated(EnumType.STRING)
     @Column(name="status",nullable = false, unique = false)
-    private EstadosUsuario estado;
+    private EstadosUsuarios estado;
     @Column(name="dateOfBirth",nullable = true, unique = false)
     private LocalDate fechaNacimiento;
     @Enumerated(EnumType.STRING)
@@ -46,7 +46,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombres, String correo, String contraseña, EstadosUsuario estado, LocalDate fechaNacimiento, TipoDocumento tipoDocumento, String documento) {
+    public Usuario(Integer id, String nombres, String correo, String contraseña, EstadosUsuarios estado, LocalDate fechaNacimiento, TipoDocumento tipoDocumento, String documento) {
         this.id = id;
         this.nombres = nombres;
         this.correo = correo;
@@ -89,11 +89,11 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
-    public EstadosUsuario getEstado() {
+    public EstadosUsuarios getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadosUsuario estado) {
+    public void setEstado(EstadosUsuarios estado) {
         this.estado = estado;
     }
 

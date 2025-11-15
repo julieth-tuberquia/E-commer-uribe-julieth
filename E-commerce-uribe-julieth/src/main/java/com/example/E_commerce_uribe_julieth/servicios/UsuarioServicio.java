@@ -9,6 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UsuarioServicio {
     @Autowired
@@ -61,5 +65,82 @@ public class UsuarioServicio {
         //Retornar el dto al controlador
         return this.Mapa.convertir_usuario_a_usuariogenericodto(usuarioQueGuardoElRepo);
 
+        //CONTROLADORES
     }
+    //Buscar todos los usuarios (Lista)
+    public List<UsuarioGenericoDTO> buscarTodosLosUsuarios (){
+        List<Usuario> listaDeUsuariosConsultados=this.Repositorio.findAll();
+        return  this.Mapa.convertir_lista_a_listadtogenerico(listaDeUsuariosConsultados);
+    }
+
+    //Buscar Un usurio por ID
+    public UsuarioGenericoDTO buscarUsuarioGnericoPorId(Integer id){
+        Optional<Usuario> UsuarioQueEstoyBuscando = this.Repositorio.findById(id);
+        if (!UsuarioQueEstoyBuscando.isPresent()){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "El usuario no encontrado"+id+" suministrado"
+            );
+        }
+        Usuario usuarioEncontrado =  UsuarioQueEstoyBuscando.get();
+        return this.Mapa.convertir_usuario_a_usuariogenericodto(usuarioEncontrado);
+    }
+
+
+    //Eliminar usuario
+    public void elimiarUsuario(Integer id) {
+        Optional<Usuario> UsuarioQueEstoyBuscando = this.Repositorio.findById(id);
+        if (!UsuarioQueEstoyBuscando.isPresent()) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "El usuario no encontrado" + id + " suministrado"
+            );
+        }
+        Usuario usuarioEncontrado = UsuarioQueEstoyBuscando.get();
+        try {
+            this.Repositorio.delete(usuarioEncontrado);
+        } catch (Exception error) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "No se puedo eliminar el usiario" + error.getMessage()
+            );
+        }
+    }
+
+
+    // Modificar algunos datos de un usuario
+
+    public UsuarioGenericoDTO actulalizarUsuario(Integer id, Usuario datosActualizados) {
+        Optional<Usuario> UsuarioQueEstoyBuscando = this.Repositorio.findById(id);
+        if (!UsuarioQueEstoyBuscando.isPresent()){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "El usuario no encontrado"+id+" suministrado"
+            );
+        }
+        Usuario usuarioEncontrado =  UsuarioQueEstoyBuscando.get();
+
+        //Aplique validaciones sobre los datos que mandaron desde el front
+
+        //Actualizo los campos que se permitieron modificar
+        //Nombre // Correo
+
+        usuarioEncontrado.setNombres(datosActualizados.getNombres());
+        usuarioEncontrado.setCorreo(datosActualizados.getCorreo());
+
+        //  Concluyo la operacion en la base d datos
+        Usuario usuarioActualizado =  this.Repositorio.save(usuarioEncontrado);
+
+        if (usuarioActualizado==null){
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Error al actualizar el usuario en la base de datos, intentelo de nuevo"
+            );
+        }
+
+    return this.Mapa.convertir_usuario_a_usuariogenericodto(usuarioActualizado);
+
+    }
+
+
 }
